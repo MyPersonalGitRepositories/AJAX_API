@@ -37,7 +37,7 @@ jQuery.ajax({
         console.log('Added to list');
     },
     error: function (xhr) {
-        alert("An error occured: " + xhr.status + " " + xhr.statusText);
+        alert("An error occurred: " + xhr.status + " " + xhr.statusText);
     },
 });
 
@@ -164,7 +164,7 @@ $(document).on('click', '.details', function () {
 
         },
         error: function (xhr) {
-            alert("An error occured: " + xhr.status + " " + xhr.statusText);
+            alert("An error occurred: " + xhr.status + " " + xhr.statusText);
         },
     });
     $('#myModal').modal('show');
@@ -185,7 +185,7 @@ $('.All').on('click', function () {
             console.log('Added to grid');
         },
         error: function (xhr) {
-            alert("An error occured: " + xhr.status + " " + xhr.statusText);
+            alert("An error occurred: " + xhr.status + " " + xhr.statusText);
         },
     });
 });
@@ -228,7 +228,7 @@ $('.cartMine').on('click', function () {
 
             },
             error: function (xhr) {
-                alert("An error occured: " + xhr.status + " " + xhr.statusText);
+                alert("An error occurrd: " + xhr.status + " " + xhr.statusText);
             },
         });
 
@@ -311,7 +311,7 @@ $(document).on('click', '.submitButton', function (e) {
         },
         error:
             function (xhr) {
-                alert("An error occured: " + xhr.status + json);
+                alert("An error occurred: " + xhr.status + json);
             },
     });
 

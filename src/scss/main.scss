@@ -292,3 +292,57 @@ header {
   cursor: pointer;
   opacity: .75;
 }
+
+.productImg {
+  width: 120px;
+  height: auto;
+}
+
+.cartHeader {
+  font-size: 20px;
+}
+
+.details {
+  cursor: pointer;
+  outline: none;
+  background-color: #4CAF50;
+  color: black;
+
+}
+
+.details:hover {
+  background-color: #3e8e41
+}
+
+.details:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.addToCart {
+  cursor: pointer;
+  outline: none;
+  background-color: #4CAF50;
+  color: #fff;
+}
+
+.addToCart:hover {
+  background-color: #3e8e41
+}
+
+.addToCart:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.prodInCartAmount {
+  margin-left: 5px;
+  color: white;
+}
+
+.deleteButton {
+  margin-top: 5px;
+}
+
