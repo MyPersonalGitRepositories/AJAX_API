@@ -65,7 +65,6 @@ function dropdownFunction() {
 }
 let arr = [];
 let c = 0;
-//КНОПКА ДОДАТИ ДО КОШИКА
 $(document).on('click', '.addToCart', function () {
     var num2 = $(this).closest('.card').data('product-id');
     //addCartItem(num2);

@@ -11,14 +11,12 @@ let _productInCart = ({
     </div>
 </div>
 <div class="row" style="padding-bottom: 10px; padding-top: 10px">
-    <div class="decreaseButton col-xs-2 col-sm-2 col-md-2 col-lg-2">
-        <img src="img/left-arrow.png" width="15" height="auto" alt="left">
+    <div class="decreaseButton glyphicon glyphicon-minus col-xs-2 col-sm-2 col-md-2 col-lg-2">
     </div>
     <div class="productAmount col-xs-2 col-sm-2 col-md-2 col-lg-2">
         ${itemCount}
     </div>
-    <div class="increaseButton col-xs-2 col-sm-2 col-md-2 col-lg-2">
-        <img src="img/right-arrow.png" width="15" height="auto" alt="right">
+    <div class="increaseButton glyphicon glyphicon-plus col-xs-2 col-sm-2 col-md-2 col-lg-2">
     </div>    
 </div></div>
 `));

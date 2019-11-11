@@ -1,13 +1,10 @@
 const path = require('path');
-
-// ... contents of webpack.config.utils
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-
 module.exports = {
     entry: './src/index.js',
     output: {
         path: path.resolve(__dirname, 'docs'),
-        filename: 'utils/main.utils',
+        filename: 'js/main.js',
     },
     module: {
         rules: [
@@ -21,6 +18,7 @@ module.exports = {
                     },
                 },
             },
+            // ...additional rules...
             {
                 test: /\.(sa|sc|c)ss$/,
                 use: [
@@ -37,3 +35,4 @@ module.exports = {
         }),
     ],
 };
+
