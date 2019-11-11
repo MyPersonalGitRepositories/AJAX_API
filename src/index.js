@@ -2,20 +2,20 @@ import './scss/main.scss';
 
 console.log(`The time is ${new Date()}`);
 
-$(function () {
-    $("#navbarToggle").blur(function (event) {
-        var screenWidth = window.innerWidth;
-        if (screenWidth < 768) {
-            $("#collapsable-nav").collapse('hide');
-        }
-    });
-});
-
-$('#btn').on('click', showModal);
-
-function showModal() {
-    $('#cart').modal('show');
-}
+// $(function () {
+//     $("#navbarToggle").blur(function (event) {
+//         var screenWidth = window.innerWidth;
+//         if (screenWidth < 768) {
+//             $("#collapsable-nav").collapse('hide');
+//         }
+//     });
+// });
+//
+// $('#btn').on('click', showModal);
+//
+// function showModal() {
+//     $('#cart').modal('show');
+// }
 
 let _makeProduct = require('./js/item');
 
