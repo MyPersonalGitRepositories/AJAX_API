@@ -74,6 +74,85 @@ function dropdownFunction() {
 
 }
 
+let arr = [];
+let c = 0;
+$(document).on('click', '.addToCart', function () {
+    var num2 = $(this).closest('.card').data('product-id');
+    //addCartItem(num2);
+    // test1 = num2;
+    jQuery.ajax({
+        url: `https://nit.tron.net.ua/api/product/${num2}`,
+        method: 'get',
+        dataType: 'json',
+        success: function (json) {
+            /*if(arr.contains(itemId.name)){
+
+            }*/
+            c++;
+            $(".prodInCartAmount").empty();
+            ($(`<div>${c}</div>`)).appendTo(".prodInCartAmount");
+            let kr = true;
+            for (let l = 0; l < arr.length; l++) {
+                if (arr[l].itemId.id == num2) {
+
+                    console.log(arr[l].itemCount);
+                    arr[l].itemCount++;
+                    console.log(arr[l].itemCount);
+                    kr = false;
+                    break;
+                }
+
+            }
+            if (kr)
+                arr.push({itemId: json, itemCount: 1});
+            //_productInCart(json);
+
+        },
+        error: function (xhr) {
+            alert("An error occured: " + xhr.status + " " + xhr.statusText);
+        },
+    });
+
+
+});
+$(document).on('click', '.addToCartDesc', function () {
+    var num2 = $(this).data('product-id');
+    //addCartItem(num2);
+    // test1 = num2;
+    jQuery.ajax({
+        url: `https://nit.tron.net.ua/api/product/${num2}`,
+        method: 'get',
+        dataType: 'json',
+        success: function (json) {
+
+            c++;
+            $(".prodInCartAmount").empty();
+            ($(`<div>${c}</div>`)).appendTo(".prodInCartAmount");
+            let kr = true;
+            for (let l = 0; l < arr.length; l++) {
+                if (arr[l].itemId.id == num2) {
+
+                    console.log(arr[l].itemCount);
+                    arr[l].itemCount++;
+                    console.log(arr[l].itemCount);
+                    kr = false;
+                    break;
+                }
+
+            }
+            if (kr)
+                arr.push({itemId: json, itemCount: 1});
+            //_productInCart(json);
+
+        },
+        error: function (xhr) {
+            alert("An error occurred: " + xhr.status + " " + xhr.statusText);
+        },
+    });
+
+
+});
+
 
 
 
