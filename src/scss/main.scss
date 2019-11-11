@@ -2,10 +2,10 @@
   position: relative;
 }
 
-body {
-  background: url("/docs/img/back.jpg");
-
-}
+//body {
+//  background: url("/docs/img/back.jpg");
+// TODO TO THINK ABOOUT NEW BACKGROUND
+//}
 
 html, body {
   height: 100%;
@@ -113,9 +113,9 @@ header {
   border: 2px solid black;
 }
 
-.dashed {
-  border-top: 2px dashed black;
-}
+//.dashed {
+//  border-top: 2px dashed black;
+//}
 
 .panel-footer {
   margin-top: 70px;
@@ -178,79 +178,79 @@ header {
   margin: 10px 10px 10px 10px;
 }
 
-.item {
-  display: inline-block;
-  border: 1px solid black;
-  margin: 1.5%;
-  text-align: center;
-  padding: 10px;
-  overflow: hidden;
-  background: #ffffff;
-}
-
-.item:hover {
-  -webkit-transform: scale(1.2);
-  -ms-transform: scale(1.2);
-  transform: scale(1.2);
-}
-
-.item img {
-  width: 50%;
-  height: 50%;
-}
-
-.productName {
-  margin-top: 0.8%;
-}
-
-.price-block {
-  width: 100%;
-  height: 100%;
-  margin: 5px;
-}
-
-.show-cart li {
-  display: flex;
-}
-
-.button {
-  width: 100%;
-  height: 100%;
-}
-
-.whenPrint {
-  display: none;
-}
-
-del {
-  font-size: 10pt;
-  color: #a9a9a9;
-}
-
-.price {
-  display: inline-block;
-  font-size: 19pt;
-}
-
-@media print {
-  .button {
-    display: none;
-
-  }
-  .whenPrint {
-    display: inline-block;
-  }
-}
+//.item {
+//  display: inline-block;
+//  border: 1px solid black;
+//  margin: 1.5%;
+//  text-align: center;
+//  padding: 10px;
+//  overflow: hidden;
+//  background: #ffffff;
+//}
+//
+//.item:hover {
+//  -webkit-transform: scale(1.2);
+//  -ms-transform: scale(1.2);
+//  transform: scale(1.2);
+//}
+//
+//.item img {
+//  width: 50%;
+//  height: 50%;
+//}
+//
+//.productName {
+//  margin-top: 0.8%;
+//}
+//
+//.price-block {
+//  width: 100%;
+//  height: 100%;
+//  margin: 5px;
+//}
+//
+//.show-cart li {
+//  display: flex;
+//}
+//
+//.button {
+//  width: 100%;
+//  height: 100%;
+//}
+//
+//.whenPrint {
+//  display: none;
+//}
+//
+//del {
+//  font-size: 10pt;
+//  color: #a9a9a9;
+//}
+//
+//.price {
+//  display: inline-block;
+//  font-size: 19pt;
+//}
+//
+//@media print {
+//  .button {
+//    display: none;
+//
+//  }
+//  .whenPrint {
+//    display: inline-block;
+//  }
+//}
 
 @media (max-width: 767px) {
-  .text {
-    padding-top: 40px;
-  }
-
-  .item {
-    margin: 20px;
-    overflow: hidden;
-  }
+  //.text {
+  //  padding-top: 40px;
+  //}
+  //
+  //.item {
+  //  margin: 20px;
+  //  overflow: hidden;
+  //}
 
   .navbar-brand h1 {
     font-size: 5vw; /* 1vw = 1% of viewport width */
