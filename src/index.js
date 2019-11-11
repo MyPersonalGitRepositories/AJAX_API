@@ -2,22 +2,8 @@ import './scss/main.scss';
 
 console.log(`The time is ${new Date()}`);
 
-// $(function () {
-//     $("#navbarToggle").blur(function (event) {
-//         var screenWidth = window.innerWidth;
-//         if (screenWidth < 768) {
-//             $("#collapsable-nav").collapse('hide');
-//         }
-//     });
-// });
-//
-// $('#btn').on('click', showModal);
-//
-// function showModal() {
-//     $('#cart').modal('show');
-// }
-
 let _makeProduct = require('./js/item');
+let _productInCart = require('./js/itemInCart');
 
 jQuery.ajax({
     url: 'https://nit.tron.net.ua/api/product/list',
@@ -31,9 +17,13 @@ jQuery.ajax({
         console.log('Added to grid');
     },
     error: function (xhr) {
-        alert("An error occured: " + xhr.status + " " + xhr.statusText);
+        alert("An error occurred: " + xhr.status + " " + xhr.statusText);
     },
 });
+
+let _listCategories = ({id, name}) => {
+    return ($('<a class="dropdown-item" href="#" id="' + id + '"></a>').text(name));
+};
 jQuery.ajax({
     url: 'https://nit.tron.net.ua/api/category/list',
     method: 'get',
@@ -68,14 +58,14 @@ function dropdownFunction() {
             console.log('Added to grid');
         },
         error: function (xhr) {
-            alert("An error occured: " + xhr.status + " " + xhr.statusText);
+            alert("An error occurred: " + xhr.status + " " + xhr.statusText);
         },
     });
 
 }
-
 let arr = [];
 let c = 0;
+//КНОПКА ДОДАТИ ДО КОШИКА
 $(document).on('click', '.addToCart', function () {
     var num2 = $(this).closest('.card').data('product-id');
     //addCartItem(num2);
@@ -109,12 +99,13 @@ $(document).on('click', '.addToCart', function () {
 
         },
         error: function (xhr) {
-            alert("An error occured: " + xhr.status + " " + xhr.statusText);
+            alert("An error occurred: " + xhr.status + " " + xhr.statusText);
         },
     });
 
 
 });
+
 $(document).on('click', '.addToCartDesc', function () {
     var num2 = $(this).data('product-id');
     //addCartItem(num2);
@@ -153,6 +144,34 @@ $(document).on('click', '.addToCartDesc', function () {
 
 });
 
+
+//dropdown
+$(".dropdown-item").on('click', dropdownFunction);
+//DETAILS
+let _makeDesc = require('./js/item-description');
+$(document).on('click', '.details', function () {
+    // let num = $(this).attr("data-product-id");
+    let num = $(this).closest('.card').data('product-id');
+    console.log(num);
+    $(".modal-header").empty();
+    $(".modal-body").empty();
+    $(".modal-footer").empty();
+    jQuery.ajax({
+        url: `https://nit.tron.net.ua/api/product/${num}`,
+        method: 'get',
+        dataType: 'json',
+        success: function (json) {
+            _makeDesc(json);
+
+        },
+        error: function (xhr) {
+            alert("An error occured: " + xhr.status + " " + xhr.statusText);
+        },
+    });
+    $('#myModal').modal('show');
+});
+
+
 $('.All').on('click', function () {
     $(".product-grid").empty();
     jQuery.ajax({
@@ -171,30 +190,10 @@ $('.All').on('click', function () {
         },
     });
 });
-$(document).on('click', '.deleteButton', function () {
 
-    let num = $(this).attr("id");
-    for (let i = 0; i < arr.length; i++) {
-        console.log(arr[i].itemId.id + ' ' + num);
-        if (arr[i].itemId.id === num) {
-            kD -= arr[i].itemId.price * arr[i].itemCount;
-            c -= arr[i].itemCount;
-            $(".prodInCartAmount").empty();
-            $(`<div>${c}</div>`).appendTo(".prodInCartAmount");
-            console.log('here ' + arr[i].itemId.price + ' ' + kD + ' ' + arr[i].itemCount);
-            arr.splice(i, 1);
-            break;
-        }
-    }
-    $('.totPrice > .totPrice-count').text('Total price: ' + kD);
 
-    console.log(arr);
-    $(this).parent().parent().parent().remove();
-    //('.totPrice').empty();
-});
+let _makeOrder = require('./js/CartModal');
 
-let _makeOrder = require('./modules/CartModal');
-//КНОПКА КОШИКА
 let kD = 0;
 $('.cartMine').on('click', function () {
 
@@ -238,173 +237,84 @@ $('.cartMine').on('click', function () {
     $('#myModal').modal('show');
 });
 
+$(document).on('click', '.deleteButton', function () {
 
-// var shoppingCart = (function () {
-//
-//     var cart = [];
-//
-//     function Item(name, price, count) {
-//         this.name = name;
-//         this.price = price;
-//         this.count = count;
-//     }
-//
-//     function saveCart() {
-//         localStorage.setItem('shoppingCart', JSON.stringify(cart));
-//     }
-//
-//     function loadCart() {
-//         cart = JSON.parse(localStorage.getItem('shoppingCart'));
-//     }
-//
-//     if (localStorage.getItem("shoppingCart") != null) {
-//         loadCart();
-//     }
-//
-//     var obj = {};
-//
-//     obj.addItemToCart = function (name, price, count) {
-//         for (var item in cart) {
-//             if (cart[item].name === name) {
-//                 cart[item].count++;
-//                 saveCart();
-//                 return;
-//             }
-//         }
-//         var item = new Item(name, price, count);
-//         cart.push(item);
-//         saveCart();
-//     }
-//
-//     obj.setCountForItem = function (name, count) {
-//         for (var i in cart) {
-//             if (cart[i].name === name) {
-//                 cart[i].count = count;
-//                 break;
-//             }
-//         }
-//     };
-//
-//     obj.removeItemFromCart = function (name) {
-//         for (var item in cart) {
-//             if (cart[item].name === name) {
-//                 cart[item].count--;
-//                 if (cart[item].count === 0) {
-//                     cart.splice(item, 1);
-//                 }
-//                 break;
-//             }
-//         }
-//         saveCart();
-//     }
-//
-//     obj.removeItemFromCartAll = function (name) {
-//         for (var item in cart) {
-//             if (cart[item].name === name) {
-//                 cart.splice(item, 1);
-//                 break;
-//             }
-//         }
-//         saveCart();
-//     }
-//     obj.clearCart = function () {
-//         cart = [];
-//         saveCart();
-//     }
-//
-//     obj.totalCount = function () {
-//         var totalCount = 0;
-//         for (var item in cart) {
-//             totalCount += cart[item].count;
-//         }
-//         return totalCount;
-//     }
-//
-//     obj.totalCart = function () {
-//         var totalCart = 0;
-//         for (var item in cart) {
-//             totalCart += cart[item].price * cart[item].count;
-//         }
-//         return Number(totalCart.toFixed(2));
-//     }
-//
-//     obj.listCart = function () {
-//         var cartCopy = [];
-//         for (var i in cart) {
-//             var item = cart[i];
-//             var itemCopy = {};
-//             for (var p in item) {
-//                 itemCopy[p] = item[p];
-//
-//             }
-//             itemCopy.total = Number(item.price * item.count).toFixed(2);
-//             cartCopy.push(itemCopy)
-//         }
-//         return cartCopy;
-//     }
-//     return obj;
-// })();
-//
-// $('.add-to-cart').click(function (event) {
-//     event.preventDefault();
-//     var name = $(this).data('name');
-//     var price = Number($(this).data('price'));
-//     shoppingCart.addItemToCart(name, price, 1);
-//     displayCart();
-// });
-//
-// // Clear items
-// $('.clear-cart').click(function () {
-//     shoppingCart.clearCart();
-//     displayCart();
-// });
-//
-//
-// function displayCart() {
-//     var cartArray = shoppingCart.listCart();
-//     var output = "";
-//     for (var i in cartArray) {
-//         output += "<tr>"
-//             + "<td>" + cartArray[i].name + "</td>"
-//             + "<td>" + cartArray[i].price + " hrn.</td>"
-//             + "<td><button class='minus-item btn btn-primary' data-name=" + cartArray[i].name + "><span class='glyphicon glyphicon-minus'></span></button></td>"
-//             + "<td><span >" + cartArray[i].count + "</span></td>"
-//             + "<td><button class='plus-item btn btn-primary' data-name=" + cartArray[i].name + "><span class='glyphicon glyphicon-plus'></span></button></td>"
-//             + "</tr>"
-//             + "<tr>"
-//             + "<td><strong>Overall price: </strong>" + cartArray[i].total + "</td>"
-//             + "<td><button class='delete-item btn btn-danger' data-name=" + cartArray[i].name + "><span class='glyphicon glyphicon-trash'></span></button></td>"
-//             + "</tr>"
-//         ;
-//     }
-//     $('.show-cart').html(output);
-//     $('.total-cart').html(shoppingCart.totalCart());
-//     $('.total-count').html(shoppingCart.totalCount());
-// }
-//
-// $('.show-cart').on("click", ".delete-item", function (event) {
-//     var name = $(this).data('name')
-//     shoppingCart.removeItemFromCartAll(name);
-//     displayCart();
-// })
-//
-// $('.show-cart').on("click", ".minus-item", function (event) {
-//     var name = $(this).data('name')
-//     shoppingCart.removeItemFromCart(name);
-//     displayCart();
-// })
-//
-// $('.show-cart').on("click", ".plus-item", function (event) {
-//     var name = $(this).data('name')
-//     shoppingCart.addItemToCart(name);
-//     displayCart();
-// })
-//
-// $('.show-cart').on("change", ".item-count", function (event) {
-//     var name = $(this).data('name');
-//     var count = Number($(this).val());
-//     shoppingCart.setCountForItem(name, count);
-//     displayCart();
-// });
-//
-// displayCart();
+    let num = $(this).attr("id");
+    for (let i = 0; i < arr.length; i++) {
+        console.log(arr[i].itemId.id + ' ' + num);
+        if (arr[i].itemId.id === num) {
+            kD -= arr[i].itemId.price * arr[i].itemCount;
+            c -= arr[i].itemCount;
+            $(".prodInCartAmount").empty();
+            $(`<div>${c}</div>`).appendTo(".prodInCartAmount");
+            console.log('here ' + arr[i].itemId.price + ' ' + kD + ' ' + arr[i].itemCount);
+            arr.splice(i, 1);
+            break;
+        }
+    }
+    $('.totPrice > .totPrice-count').text('Total price: ' + kD);
+
+    console.log(arr);
+    $(this).parent().parent().parent().remove();
+    //('.totPrice').empty();
+});
+
+//$(document).on('click', '.totalPriceBut', function () {
+//});
+let errAmount = 0;
+$(document).on('click', '.submitButton', function (e) {
+    e.preventDefault();
+    let $name = $('#clientName').val();
+    let $email = $('#Email').val();
+    let $tel = $('#clientPhone').val();
+    let $data = {
+        token: 'W0RlP4xUpxJD_kXGnxJ7',
+        name: $name,
+        phone: $tel,
+        email: $email,
+    };
+
+    arr.forEach(product => {
+        $data[`products[${product.itemId.id}]`] = product.itemCount;
+    });
+
+    jQuery.ajax({
+        url: "https://nit.tron.net.ua/api/order/add",
+        method: 'post',
+        data: $data,
+        dataType: 'json',
+
+        success: function (json) {
+            if (json.status === "success") {
+                $(".modal-header").empty();
+                $(".modal-body").empty();
+                $(".modal-footer").empty();
+                arr.splice(0, arr.length);
+
+                $(".prodInCartAmount").text('0');
+                c = 0;
+                kD = 0;
+                $(`<div class="successfulOrder">Thank you for your order!</div>`).appendTo('.modal-body');
+                errAmount = 0;
+
+            } else {
+                if (errAmount == 0) {
+                    console.log(json);
+                    for (let key in json.errors) {
+                        json.errors[key].forEach(err => $(`.modal-body`).append($(`<div style="color:darkred">`).text(err)));
+                    }
+                }
+                errAmount++;
+
+            }
+
+            $('#myModal').modal('show');
+        },
+        error:
+            function (xhr) {
+                alert("An error occured: " + xhr.status + json);
+            },
+    });
+
+
+});
