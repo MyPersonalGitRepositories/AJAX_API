@@ -34,6 +34,47 @@ jQuery.ajax({
         alert("An error occured: " + xhr.status + " " + xhr.statusText);
     },
 });
+jQuery.ajax({
+    url: 'https://nit.tron.net.ua/api/category/list',
+    method: 'get',
+    dataType: 'json',
+    success: function (json) {
+        console.log('Loaded category list!');
+        // console.log(json);
+        console.table(json);
+        json.forEach(category => $('.dropdown-menu').append(_listCategories(category)));
+        $(".dropdown-item").on('click', dropdownFunction);
+        console.log('Added to list');
+    },
+    error: function (xhr) {
+        alert("An error occured: " + xhr.status + " " + xhr.statusText);
+    },
+});
+
+function dropdownFunction() {
+    let num = $(this).attr("id");
+    $(".product-grid").empty();
+    jQuery.ajax({
+
+        url: 'https://nit.tron.net.ua/api/product/list/category/' + num,
+        method: 'get',
+        dataType: 'json',
+        success: function (json) {
+
+            console.log('Loaded via AJAX!');
+            // console.log(json);
+            console.table(json);
+            json.forEach(product => $('.product-grid').append(_makeProduct(product)));
+            console.log('Added to grid');
+        },
+        error: function (xhr) {
+            alert("An error occured: " + xhr.status + " " + xhr.statusText);
+        },
+    });
+
+}
+
+
 
 
 // var shoppingCart = (function () {
