@@ -153,7 +153,90 @@ $(document).on('click', '.addToCartDesc', function () {
 
 });
 
+$('.All').on('click', function () {
+    $(".product-grid").empty();
+    jQuery.ajax({
+        url: 'https://nit.tron.net.ua/api/product/list',
+        method: 'get',
+        dataType: 'json',
+        success: function (json) {
+            console.log('Loaded via AJAX!');
+            // console.log(json);
+            console.table(json);
+            json.forEach(product => $('.product-grid').append(_makeProduct(product)));
+            console.log('Added to grid');
+        },
+        error: function (xhr) {
+            alert("An error occured: " + xhr.status + " " + xhr.statusText);
+        },
+    });
+});
+$(document).on('click', '.deleteButton', function () {
 
+    let num = $(this).attr("id");
+    for (let i = 0; i < arr.length; i++) {
+        console.log(arr[i].itemId.id + ' ' + num);
+        if (arr[i].itemId.id === num) {
+            kD -= arr[i].itemId.price * arr[i].itemCount;
+            c -= arr[i].itemCount;
+            $(".prodInCartAmount").empty();
+            $(`<div>${c}</div>`).appendTo(".prodInCartAmount");
+            console.log('here ' + arr[i].itemId.price + ' ' + kD + ' ' + arr[i].itemCount);
+            arr.splice(i, 1);
+            break;
+        }
+    }
+    $('.totPrice > .totPrice-count').text('Total price: ' + kD);
+
+    console.log(arr);
+    $(this).parent().parent().parent().remove();
+    //('.totPrice').empty();
+});
+
+let _makeOrder = require('./modules/CartModal');
+//КНОПКА КОШИКА
+let kD = 0;
+$('.cartMine').on('click', function () {
+
+    $(".modal-header").empty();
+    ($(`
+    <div class="cartHeader">Cart</div>
+    <button type="button" class="close " style="margin-left: 5px" data-dismiss="modal">&times;</button>`)).appendTo(".modal-header");
+    $(".modal-body").empty();
+    $(".modal-footer").empty();
+
+    arr.forEach(_productInCart);
+
+    if (arr.length == 0) {
+        ($(`<div style="margin-top: 5px">Your cart is empty(</div>`)).appendTo('.modal-body');
+    } else {
+
+
+        for (let i = 0; i < arr.length; i++) {
+
+            kD += arr[i].itemId.price * arr[i].itemCount;
+
+        }
+        console.log(kD);
+
+
+        jQuery.ajax({
+            url: 'https://nit.tron.net.ua/api/product/list/category/4',
+            method: 'get',
+            dataType: 'json',
+            success: function (json) {
+                _makeOrder(json);
+                $('.totPrice > .totPrice-count').text('Total price: ' + kD);
+
+            },
+            error: function (xhr) {
+                alert("An error occured: " + xhr.status + " " + xhr.statusText);
+            },
+        });
+
+    }
+    $('#myModal').modal('show');
+});
 
 
 // var shoppingCart = (function () {
