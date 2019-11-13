@@ -6,9 +6,9 @@ let _makeHtml = ({
                      price,
                      special_price,
                  }) => {
-    let $product = $(`<div class="card col-xs-12 col-sm-4 col-md-3" data-product-id="${id}">`);
-    $product.append($(`<img src="${image_url}" alt="${name}" class="img-fluid product-image" >`));
-    $product.append($(`<span class="product-title" style="font-weight: bold">`).text(name));
+    let $product = $(`<div class=" item card" data-product-id="${id}">`);
+    $product.append($(`<div class="img-container"><img src="${image_url}" alt="${name}" class="productImg"></div>`));
+    $product.append($(`<div><span class="product-title" style="font-weight: bold"></div>`).text(name));
 
     if (special_price != null) {
 
@@ -17,7 +17,7 @@ let _makeHtml = ({
     } else {
         $product.append($(`<span class="product-price">`).text(price));
     }
-    $product.append($(`<button type="button" data-target="#myModal" data-toggle="modal" class="details btn btn-default btn-sm mt-2 mb-2" >`).text("Details"));
+    $product.append($(`<br><button type="button" data-target="#myModal" data-toggle="modal" class="details btn btn-default btn-sm mt-2 mb-2" >`).text("Details"));
     $product.append($(`<button type="button" href="#cartBut" class="addToCart btn btn-info btn-sm mt-2 mb-2" data-product-id="${id}">`).text("Add to cart"));
     //$product.append($('<span class="product-description">').text(description));
 

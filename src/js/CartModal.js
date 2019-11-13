@@ -26,7 +26,7 @@ let _makeOrder = ({}) => {
                     
                     
                     
-                    <button type="submit" class="submitButton btn btn-info btn-sm" style="margin-bottom: 10px; float: right">Submit</button>
+                    <button type="submit" class="submitButton btn btn-info btn-sm" style="float: right">Submit</button>
                 </form>`)).appendTo(".modal-body");
 
 

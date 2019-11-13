@@ -22,7 +22,7 @@ jQuery.ajax({
 });
 
 let _listCategories = ({id, name}) => {
-    return ($('<a class="dropdown-item" href="#" id="' + id + '"></a>').text(name));
+    return ($('<br><a class="dropdown-item" href="#" id="' + id + '"></a>').text(name));
 };
 jQuery.ajax({
     url: 'https://nit.tron.net.ua/api/category/list',
@@ -235,6 +235,7 @@ $('.cartMine').on('click', function () {
     }
     $('#myModal').modal('show');
 });
+
 
 $(document).on('click', '.deleteButton', function () {
 

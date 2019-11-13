@@ -10,6 +10,7 @@ let _productInCart = ({
         <button type="button" id="${itemId.id}" class="deleteButton btn btn-warning btn-sm">Delete</button>
     </div>
 </div>
+<!--TODO INCREASE/DECREASE FUNCTIONALITY-->
 <div class="row" style="padding-bottom: 10px; padding-top: 10px">
     <div class="decreaseButton glyphicon glyphicon-minus col-xs-2 col-sm-2 col-md-2 col-lg-2">
     </div>
