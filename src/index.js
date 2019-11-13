@@ -107,8 +107,6 @@ $(document).on('click', '.addToCart', function () {
 
 $(document).on('click', '.addToCartDesc', function () {
     var num2 = $(this).data('product-id');
-    //addCartItem(num2);
-    // test1 = num2;
     jQuery.ajax({
         url: `https://nit.tron.net.ua/api/product/${num2}`,
         method: 'get',
@@ -132,7 +130,6 @@ $(document).on('click', '.addToCartDesc', function () {
             }
             if (kr)
                 arr.push({itemId: json, itemCount: 1});
-            //_productInCart(json);
 
         },
         error: function (xhr) {
@@ -211,8 +208,12 @@ $('.cartMine').on('click', function () {
 
 
         for (let i = 0; i < arr.length; i++) {
+            if (arr[i].itemId.special_price != null) {
+                kD += arr[i].itemId.special_price * arr[i].itemCount;
+            } else {
+                kD += arr[i].itemId.price * arr[i].itemCount;
+            }
 
-            kD += arr[i].itemId.price * arr[i].itemCount;
 
         }
         console.log(kD);
@@ -236,14 +237,18 @@ $('.cartMine').on('click', function () {
     $('#myModal').modal('show');
 });
 
-
 $(document).on('click', '.deleteButton', function () {
 
     let num = $(this).attr("id");
     for (let i = 0; i < arr.length; i++) {
         console.log(arr[i].itemId.id + ' ' + num);
         if (arr[i].itemId.id === num) {
-            kD -= arr[i].itemId.price * arr[i].itemCount;
+            if (arr[i].itemId.special_price != null) {
+                kD -= arr[i].itemId.special_price * arr[i].itemCount;
+
+            } else {
+                kD -= arr[i].itemId.price * arr[i].itemCount;
+            }
             c -= arr[i].itemCount;
             $(".prodInCartAmount").empty();
             $(`<div>${c}</div>`).appendTo(".prodInCartAmount");
@@ -256,11 +261,9 @@ $(document).on('click', '.deleteButton', function () {
 
     console.log(arr);
     $(this).parent().parent().parent().remove();
-    //('.totPrice').empty();
 });
 
-//$(document).on('click', '.totalPriceBut', function () {
-//});
+
 let errAmount = 0;
 $(document).on('click', '.submitButton', function (e) {
     e.preventDefault();
