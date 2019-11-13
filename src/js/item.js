@@ -19,7 +19,6 @@ let _makeHtml = ({
     }
     $product.append($(`<br><button type="button" data-target="#myModal" data-toggle="modal" class="details btn btn-default btn-sm mt-2 mb-2" >`).text("Details"));
     $product.append($(`<button type="button" href="#cartBut" class="addToCart btn btn-info btn-sm mt-2 mb-2" data-product-id="${id}">`).text("Add to cart"));
-    //$product.append($('<span class="product-description">').text(description));
 
     return $product;
 };

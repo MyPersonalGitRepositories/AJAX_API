@@ -18,7 +18,6 @@ let _makeDesc = ({
         ($(`<div class="product_price">`).text(price + " uah")).appendTo(".modal-body");
     }
     ($(`<button type="button" class="addToCartDesc btn float-left" data-product-id="${id}">Add to cart</button>`)).appendTo(".modal-footer");
-    //($(`<button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>`)).appendTo('.modal-footer');
 };
 
 module.exports = _makeDesc;

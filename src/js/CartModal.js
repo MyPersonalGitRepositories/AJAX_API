@@ -1,6 +1,5 @@
 let _makeOrder = ({}) => {
 
-//<button type="button"  class="totalPriceBut btn btn-warning btn-sm">Maybe you want to know total price?))</button>
     ($(`  
   <div class="totPrice">
   <div style="margin-top: 5px; text-decoration: underline; text-decoration-color: #c69500" class="totPrice-count">Total price: 0</div>
